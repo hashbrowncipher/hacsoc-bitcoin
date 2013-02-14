@@ -24,128 +24,194 @@
         bottom: 0;
         margin: 20px;
     }
+    
+    .references li {
+        margin: .5em -1em;
+    }
 
 </style>
 </head>
 <body>
-<div class="slide titlepage">
-    <h1>Paying by Check: Bitcoin and the future of currency</h1>
-</div>
-<div class="slide">
-    <img style="float: right; margin-top: 10px; height: 150px" src="img/addorsed.png">
-    <h1>En - dorse?</h1>
-    <ul class="incremental">
-        <img src="img/knuth.jpg" style="max-height: 200px">
-        <li>How does my bank get paid? <span class="incremental" style="color: red;">Clearly</span></h1>
-        <ol class="incremental">
-            <li><a href="http://www.amazon.com/Cryptonomicon-Neal-Stephenson/dp/0060512806/ref=sr_1_1?ie=UTF8&qid=1360752594">Physical transfer of checks and cash</a></li>
-            <li>A clearing house</li>
-        </ol>
-    </ul>
-</div>
-<div class="slide">
-    <h1>Currency, and its properties</h1>
-    <ul>
-        <li>Scarce</li>
-        <li>Recognizable</li>
-        <li>Transferable</li>
-    </ul>
-</div>
-<div class="slide">
-    <h1>Alice and Bob go public<sup>*</sup></h1>
-    <ul class="incremental">
-        <li>Motivation: we need a way to "sign" documents</li>
-        <div>
-            <li>Keypairs</li>
-            <li>Two parts: public, private</li>
+    <div class="slide titlepage">
+        <h1>Paying by Check: Bitcoin and the future of currency</h1>
+    </div>
+    <div class="slide">
+        <img style="float: right; margin-top: 10px; height: 150px" src="img/addorsed.png">
+        <h1>En - dorse?</h1>
+        <ul class="incremental">
+            <img src="img/knuth.jpg" style="max-height: 200px">
+            <li>How does my bank get paid? <span class="incremental" style="color: red;">Clearly</span></h1>
+            <ol class="incremental">
+                <li><a href="http://www.amazon.com/Cryptonomicon-Neal-Stephenson/dp/0060512806/ref=sr_1_1?ie=UTF8&qid=1360752594">Physical transfer of checks and cash</a></li>
+                <li>A clearing house</li>
+            </ol>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>Currency, and its properties</h1>
+        <ul>
+            <li>Scarce</li>
+            <li>Recognizable</li>
+            <li>Transferable</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>Alice and Bob go public<sup>*</sup></h1>
+        <ul class="incremental">
+            <li>Motivation: we need a way to "sign" documents</li>
+            <div>
+                <li>Keypairs</li>
+                <li>Two parts: public, private</li>
+            </div>
+            <li>A(non-nym)ous</li>
+            <li>Digital checks</li>
+        </ul>
+        <div class="bottombar">
+            <small>* with apologies to <a href="http://www.amazon.com/Code-Book-Science-Secrecy-Cryptography/dp/0385495323">Simon Singh</a></small>
         </div>
-        <li>A(non-nym)ous</li>
-        <li>Digital checks</li>
-    </ul>
-    <div class="bottombar">
-        <small>* with apologies to <a href="http://www.amazon.com/Code-Book-Science-Secrecy-Cryptography/dp/0385495323">Simon Singh</a></small>
     </div>
-</div>
-<div class="slide">
-    <div style="float: right; margin-top: 20px">
-        <img src="img/finger.jpg" style="height: 75px">
-        <img src="img/clearing.jpg" style="height: 75px; margin-left: 20px">
+    <div class="slide">
+        <div style="float: right; margin-top: 20px">
+            <img src="img/finger.jpg" style="height: 75px">
+            <img src="img/clearing.jpg" style="height: 75px; margin-left: 20px">
+        </div>
+        <h1>Digital clearing</h1>
+        <ul class="incremental">
+            <li>Alice<sup class="key">f5e8 ec7b...</sup> wrote me<sup class="key">5a77 7141...</sup> a digital check, now what?</li>
+            <li>Take it to her bank</li>
+            <li>Who is Alice's bank? <span class="incremental" style="font-weight: bold">Everybody</span></li>
+            <li>"Hey everybody, <span class="inline-key">f5e8 ec7b...</span> just signed a check for 50 BTC to <span class="inline-key">5a77 7141...</span>"</li>
+            <li><a href="http://www.weidai.com/bmoney.txt">Yup.  This works...</a></li>
+        </ul>
     </div>
-    <h1>Digital clearing</h1>
-    <ul class="incremental">
-        <li>Alice<sup class="key">f5e8 ec7b...</sup> wrote me<sup class="key">5a77 7141...</sup> a digital check, now what?</li>
-        <li>Take it to her bank</li>
-        <li>Who is Alice's bank? <span class="incremental" style="font-weight: bold">Everybody</span></li>
-        <li>"Hey everybody, <span class="inline-key">f5e8 ec7b...</span> just signed a check for 50 BTC to <span class="inline-key">5a77 7141...</span>"</li>
-        <li><a href="http://www.weidai.com/bmoney.txt">Yup.  This works...</a></li>
-    </ul>
-</div>
-<div class="slide">
-    <img src="img/racinggreen.jpg" style="float: right; margin-top: 20px; height: 100px">
-    <h1>...totally</h1>
-    <ul>
-        <li>Requires a <em>central</em>, <strong>ordered</strong> list of transactions</li>
-        <li>But I want a <strike>pony!</strike> decentralized model.</li>
-    </ul>
-</div>
-<div class="slide">
-    <h1>We made a (cryptographic) hash of it, didn't we?</h1>
-        <pre><code>
-        $ print -n 'hi tim!' | sha1sum
-        a2317cabc4abed041fdd031865877417ab046143  -
-        $ print -n 'hi steve!' | sha1sum
-        17f1b24bf73ed4eab58c9f15c7e12fe2298b80bb  -
-        </code></pre>
-    Properties:
-    <ul>
-        <li>Input: any integer</li>
-        <li>Output: a n-bit integer</li>
-        <li>Deterministic</li>
-        <li>Unpredictable</li>
-    </ul>
-</div>
-<div class="slide">
-    <h1>One linked list to rule them all!</h1>
-    <img src="img/linkedlist.png">
-    <ul>
-        <li>"Blocks" are added onto the "top" of the linked list (a.k.a. "chain") by reference to the hashed value of the previous block</li>
-        <li>But who was front?</li>
-</div>
-<div class="slide">
-    <h1>Sir Hashalot<sup>*</sup></h1>
-    <ul>
-        <li>Solution: add difficulty</li>
-        <blockquote style="border: 1px solid; padding: 10px 10px; background-color: #f5f5dc; font-family: URW Chancery L, Georgia">
-        Decree:<br />
-        Henceforth, all new blocks must get low-low-low-low.<sup>**
-        </blockquote>
-        <li>Allow only the lowest fraction of the possible n-bit hash outputs</li>
-        <li>Use n-onces</li>
-        <li>Target: one block / 10 minutes
-    </ul>
-    <div class="bottombar">
-        <small>* apologies to Hashalot and Sir Mixalot</small><br />
-        <small>** nah, Flo Rida doesn't get an apology</small>
+    <div class="slide">
+        <img src="img/racinggreen.jpg" style="float: right; margin-top: 20px; height: 100px">
+        <h1>...totally</h1>
+        <ul>
+            <li>Requires a <em>central</em>, <strong>ordered</strong> list of transactions</li>
+            <li>But I want a <strike>pony!</strike> decentralized model.</li>
+        </ul>
     </div>
-</div>
-<div class="slide">
-    <h1>Grid(b)lock</h1>
-</div>
-<div class="slide">
-    <h1>Satoshi, where do Bitcoins come from?</h1>
-</div>
-<div class="slide">
-    <h1>Why Johnny Can't Keep His Coins</h1>
-</div>
-<h1>Sample heading</h1>
-
-<p>This is a template file you can copy and edit on your own server.</p>
-
-<ul>
-<li>point 1</li>
-<li>point 2</li>
-<li>. . .</li>
-</ul>
-</div>
+    <div class="slide">
+        <h1>We made a (cryptographic) hash of it, didn't we?</h1>
+            <pre><code>
+            $ print -n 'hi tim!' | sha1sum
+            a2317cabc4abed041fdd031865877417ab046143  -
+            $ print -n 'hi steve!' | sha1sum
+            17f1b24bf73ed4eab58c9f15c7e12fe2298b80bb  -
+            </code></pre>
+        Properties:
+        <ul>
+            <li>Input: any integer</li>
+            <li>Output: a n-bit integer</li>
+            <li>Deterministic</li>
+            <li>Unpredictable</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>One linked list to rule them all!</h1>
+        <img src="img/linkedlist.png">
+        <ul>
+            <li>"Blocks" are added onto the "top" of the linked list (a.k.a. "chain") by reference to the hashed value of the previous block</li>
+            <li>But who was front?</li>
+    </div>
+    <div class="slide">
+        <h1>Sir Hashalot<sup>*</sup></h1>
+        <ul class="incremental">
+            <div>
+                <li>Solution: add difficulty</li>
+                <blockquote style="border: 1px solid; padding: 10px 10px; background-color: #f5f5dc; font-family: URW Chancery L, Georgia">
+                Decree:<br />
+                Henceforth, all new blocks must get low-low-low-low (hashes).<sup>**
+                </blockquote>
+                <li>Allow only the lowest fraction of the possible n-bit hash outputs</li>
+                <li>Use n(onces)</li>
+            </div>
+            <div>
+                <li>Target: one block / 10 minutes</li>
+                <li>Now we have to cooperate</li>
+                <li>Offer a reward for inclusion</li>
+            </div>
+        </ul>
+        <div class="bottombar">
+            <small>* apologies to Hashalot and Sir Mixalot</small><br />
+            <small>** nah, Flo Rida doesn't get an apology</small>
+        </div>
+    </div>
+    <div class="slide">
+        
+    </div>
+    <div class="slide">
+        <h1 style="color: green">Grid(b)lock</h1>
+        <img style="float: right;" src="img/blockchain.png">
+        <ul class="incremental">
+            <li>Which block wins?</li>
+            <li>the one on the longest chain!</li>
+            <li>But I don't like that block‽</li>
+            <div>
+                <li>this means WAR</li>
+                <img src="img/cyberwar.jpg">
+            </div>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1><strike>Mommy</strike> Satoshi, where do Bitcoins come from?</h1>
+        <ul class="incremental">
+            <li>Reward for mining</li>
+            <div>
+                <img style="float: right; height: 10em" src="img/supply.png">
+                <li><a href="https://en.bitcoin.it/wiki/Controlled_supply#Projected_Bitcoins_Short_Term">Schedule for rewards</a></li>
+            </div>
+            <li>Blocks are distributed "equally"</li>
+            <li>Mining is serious business</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>Why Johnny Can't Bitcoin</h1>
+        <ul class="incremental">
+            <li>Bitcoins are at the mercy of their private key</li>
+            <li>
+                <a style="color: #f00" href="http://arstechnica.com/uncategorized/2012/05/bitcoins-worth-87000-plundered/">Breaches</a>
+                <a style="color: #0f0" href="http://www.dailytech.com/Inside+the+MegaHack+of+Bitcoin+the+Full+Story/article21942.htm">have</a>
+                <a style="color: #00f" href="https://bitcointalk.org/index.php?topic=105818.0">happened.</a>
+            </li>
+            <li>Help! Help!  I'm a victim</li>
+            <li>No trust -&gt; <a href="http://arxiv.org/abs/1107.4524">(almost)</a> no recourse</li>
+            <img src="img/security.png">
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>The Apocalypse</h1>
+        <ul class="incremental">
+            <li>Cryptographic vulnerabilities</li>
+            <li>Government interference</li>
+            <div>
+                <li>Netsplits</li>
+                <img src="img/cable.jpg" style="float:right; height: 200px">
+            </div>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>Other systems</h1>
+        <ul>
+            <li><a href="http://en.wikipedia.org/wiki/MintChip">Mintchip</a></li>
+            <li>Cut and choose</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <h1>Further Reading</h1>
+        <ul class="references">
+            <li>the bitcoin paper</li>
+            Nakamoto, Satoshi. <a href="bitcoin.pdf">Bitcoin: A Peer-to-Peer Electronic Cash System</a>.
+            <li>discussion of pre-bitcoin cryptographic cash</li>
+            Schneier, Bruce. <a href="http://proquest.safaribooksonline.com/book/-/9780471117094/chapter-6-esoteric-protocols/navpoint-67">"Digital Cash."</a> <a href="http://www.amazon.com/Applied-Cryptography-Protocols-Algorithms-Source/dp/0471117099">Applied Cryptography</a>, ch. 6.4.
+            <li>for watching the bitcoin blockchain</li>
+            <a href="http://blockchain.info">blockchain.info</a>
+            <li>fun but verbose fiction, involving (peripherally) the development of modern payment systems</li>
+            Stephenson, Neal. <a href="http://en.wikipedia.org/wiki/The_Baroque_Cycle#Books">The Baroque Cycle</a>
+            <li>on the development of monetary systems</li>
+            Ferguson, Niall. <a href="http://www.amazon.com/Ascent-Money-Financial-History-World/dp/0143116177">The Ascent of Money</a>
+        </ul>
+    </div>
 </body>
 </html>

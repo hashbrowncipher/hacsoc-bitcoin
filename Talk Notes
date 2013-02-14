@@ -1,0 +1,94 @@
+En - dorse?
+    - Have you ever endorsed a check to someone?
+    - Banks get paid through a process called 'clearing'
+    - It's called 'clearing,' because you get to clear debts off the books once you're done
+    - At the simplest, a guy from your bank walks over to the other bank and demands cash
+    - Other times, banks will all bring their checks to the same place at the end of the day (and they'll add up how much they owe each other) and just pay that amount
+    - Right now it's done with clearing via the Federal Reserve, although the money is in the form of digital entries in Federal Reserve accounts.
+
+Currency
+    - Scarce: there is only so much of it.
+    - Recognizable: people understand that currency is currency, and know how much each one is worth
+    - Transferable: currency can be easily transfered from person to person
+
+So now we need to discuss some of our cryptographic tools.
+
+Alice and Bob go public
+    - People can use a mathematical algorithm to generate a pair of numbers.  As long as the numbers obey a few mathematical laws, they can form a key pair
+    - The key pair has a private part, which is held by the "owner" of the key
+    - The key pair has a public part, which is given out to the world
+    - The keypair is just a set of numbers.  Nothing dictates that it has a "name" or anything.
+    - The only thing that makes a given public key special is that someone has its associated private key.
+    - But this means that each public key is an "identity" of sorts.
+    - With this scheme, Alice can sign over money to another public key.  A digital check is formed
+
+Digital clearing
+    - How does "everybody" process a check?
+    - Everybody can see how much a public key (a.k.a address) has received in the past, so everybody just decrements one address and increments the other.
+    - Easy as pie.
+    
+But not really
+    - Transactions have to be ordered.  What if Alice has 50 BTC and signed two checks for 50 BTC nearly simultaneously? First one wins.  Who's first?
+
+Time for a little more crypto
+
+We made a hash of it
+    - Input: any integer (or message)
+    - Output: a n-bit integer
+    - Deterministic
+    - Unpredictable
+
+This means you can identify things by their hashes, which makes possible the:
+
+One linked list to rule them all
+    - People can generate announce new "blocks" all the time.  Since you can create blocks on any previous block, you'll have more of a linked tree than a linked list.
+
+Sir Hashalot
+    - Demonstrate what "lowest" would mean
+    - So every time you hash, you are putting your CPU time into a lottery, in which the jackpot is a valid block
+    - Nonces are extra data thrown in to change the hash
+    - Repeatedly hashing is called mining
+    - Difficulty is tuned (every 2016 blocks)
+    - Cooperation is now necessary
+    - Offer a reward for other users to include your transaction in their blocks
+
+Grid(b)lock (the essence)
+    - It is still possible to generate two blocks from a single parent
+    - We have to choose, so the convention is to say that the longest chain wins
+    - But if there are two blocks from the same parent, they are equally long
+    - When there is a tie, miners choose one of them to use as a basis for their next block
+    - Whoever manages to mine a new block next will have the longest chain, breaking the tie
+    - Users may have vested interests in making one of them the "canonical" block
+    - What if they decide to just continue as if their block is the best?
+    - they can try to build blocks on their favored block, but all of the nonmalicious users will prefer to build blocks using the "canonical" chain.  There will be a fight of CPU power, in which every block the good users mine makes it harder for the malicious users to catch up.
+
+Mommy, where do Bitcoins come from?
+    - Every time a block is mined, the miner can specify an address for a "reward" to go to.
+    - the reward is currently 25BTC, down (for the first time) from 50BTC
+    - the reward schedule is designed to produce a maximum number of 21 million BTC
+    - this system distributes rewards "equally" over the participants of bitcoin over years.  It will be mostly done by 2050
+    - having a high hash rate is important.  rewards are given to those with more hashes
+    - buying GPU clusters to do bitcoin hashing is subject to all sorts of cost benefit analyses.
+    - there are bitcoin mining guilds
+
+Why Johnny Can't Bitcoin
+    - who has lost their credit card before?
+    - who has lost data before?
+    - if the private key is lost, the bitcoins are lost.  No ifs ands or buts.
+    - if the private key is stolen, the bitcoins are stolen.
+    - if your bitcoins are stolen, you can trace what public keys received them.
+    - it's likely that the first public key to receive them was the attacker
+    - from there??
+    - with a bank, there is a trust relationship, and recourse to the courts
+    - with bitcoin, there is no trust.
+    - this is a plus, because you can do business while bound only by the rules of bitcoin, without interference by foreign courts, banks, etc.
+    - however, there is no means for correcting fraud, except finding people and forcing them to give up their private key.
+    - if you've ever had your identity stolen, the fraud protections of modern finance have probably helped you immensely. (i.e., you're not broke)
+    - there are many problems 
+
+Scary things
+    - If, one day, a cryptographic vulnerability were disclosed, bitcoin would need to be revised under duress.  Clients would need to be updated, and old clients could continue to cause trouble.
+    - There is nothing compelling a bitcoin user to switch over to "new" version, unlike a fiat currency.
+    - Bitcoin is the perfect money laundering tool.  It can be used to transfer money psuedo-anonymously between currencies and locations.
+    - There is a significant incentive for government to ban bitcoins and/or bitcoin exchanges, causing havoc with exchange rates.
+    - Scariest thing: netsplits.  If a country were to fall off the Internet, they would be able to generate a non-trivial blockchain.  When the network becomes available again, the network would obliterate that minority blockchain.  Many people in that minority would be unhappy about this.
